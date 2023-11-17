@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro</title>
-</head>
-<body>
-    <h1> Editar libro</h1>
+{% extends 'book/base.html' %} {% block content %}
+<h2>Editar libro</h2>
 
-    <form action="{%  url 'edit' pk=book.pk %}" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Editar libro</button><br>
-    </form>
-    
-    <button><a href=" {%  url 'list' %} "> Listado </a></button>
-</body>
-</html>
+<form action="{%  url 'edit' pk=book.pk %}" method="post">
+  {% csrf_token %} {{form.as_p}}
+  <button type="submit">Editar libro</button><br />
+</form>
+
+<a href=" {%  url 'list' %} "> <button>Listado</button> </a>
+{% endblock %}

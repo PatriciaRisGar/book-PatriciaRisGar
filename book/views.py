@@ -2,14 +2,29 @@ from django.views import View
 from book.forms import BookForm
 from book.models import Book
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 # Create your views here.
-
+"""
 class ListBook(View):
     def get(self,request):
         books = Book.objects.all()
         return render(request, 'book/list.html', {'books': books})
 
+class BookDetail(View):
+    def get(self, request, pk):
+        book = get_object_or_404(Book, pk=pk)
+        return render(request, 'book/bookDetail.html', {'book': book})
+"""
+
+class ListBook(ListView):
+    model= Book
+    template_name = 'book/list.html'
+
+class BookDetail(DetailView):
+    model= Book
+    template_name = 'book/bookDetail.html'
 
 class NewBook(View):
     books = Book.objects.all()
@@ -25,10 +40,6 @@ class NewBook(View):
         form=BookForm()
         return render(request, 'book/bookNew.html', {'books': self.books,'form': form})
 
-class BookDetail(View):
-    def get(self, request, pk):
-        book = get_object_or_404(Book, pk=pk)
-        return render(request, 'book/bookDetail.html', {'book': book})
 
 class EditBook(View):
 
@@ -43,7 +54,7 @@ class EditBook(View):
     
     def get(self, request, pk):
         book = get_object_or_404(Book, pk=pk)
-        form = BookForm(request.POST,instance=book)
-        book = get_object_or_404(Book, pk=pk)
+        form = BookForm(instance=book)
+        
         return render(request, 'book/editBook.html', {'book': book, 'form': form})
 

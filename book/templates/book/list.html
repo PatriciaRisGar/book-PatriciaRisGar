@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado</title>
-</head>
-<body>
-    <h1>Libreria</h1>
+{% extends 'book/base.html' %} {% block content %}
+<h2>Libreria</h2>
 
-    {% for book in books %}
-    <article>
-      <ul><li><a href=" {% url 'bookDetail' pk=book.pk %}">{{ book.title }}</a></li></ul>
-    </article>
-    {% endfor %}
-    
-    <button > <a href=" {%  url 'add' %} "> Nuevo </a></button>
-</body>
-</html>
+{% for book in object_list %}
+<article>
+  <ul>
+    <li>
+      <a href=" {% url 'bookDetail' pk=book.pk %}">{{ book.title }}</a>
+    </li>
+  </ul>
+</article>
+{% endfor %}
+
+<a href=" {%  url 'add' %} "> <button>Nuevo</button> </a>
+{% endblock %}
