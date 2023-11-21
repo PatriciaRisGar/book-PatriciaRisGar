@@ -9,6 +9,7 @@
   <p>Fecha de modificacion {{ book.created_at }}</p>
 </article>
 
-<a href=" {%  url 'edit' pk=book.pk %} "> <button>Editar</button> </a><br />
+<a href=" {%  url 'edit' pk=book.pk %} "> <button>Editar</button> </a>
+<a href=" {%  url 'delete' pk=book.pk %} "> <button>Borrar</button> </a>
 <a href=" {%  url 'list' %} "> <button>Listado</button> </a>
 {% endblock %}

@@ -2,13 +2,13 @@
 <h2>Libreria</h2>
 
 {% for book in object_list %}
-<article>
-  <ul>
-    <li>
-      <a href=" {% url 'bookDetail' pk=book.pk %}">{{ book.title }}</a>
-    </li>
-  </ul>
-</article>
+
+<blockquote>
+  <a href=" {% url 'bookDetail' pk=book.pk %}"><h4>{{ book.title }}</h4></a>
+  <footer>
+    <cite>- {{ book.author }}</cite>
+  </footer>
+</blockquote>
 {% endfor %}
 
 <a href=" {%  url 'add' %} "> <button>Nuevo</button> </a>

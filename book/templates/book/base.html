@@ -11,9 +11,23 @@
     <title>My sitio</title>
   </head>
   <body>
-    <h1>Mi sitio</h1>
-    <div>
-      <div>{% block content %} {% endblock %}</div>
-    </div>
+    <header>
+      <h1>Mi sitio</h1>
+    </header>
+    <main>
+      <div>
+        <div>{% block content %} {% endblock %}</div>
+      </div>
+    </main>
   </body>
+  <footer>
+    <small
+      >Built with <a href="https://picocss.com">Pico</a> •
+      <a
+        href="https://github.com/picocss/examples/blob/master/v1-classless/index.html"
+        >Source code</a
+      >
+      • by Patricia Riscart Garcia</small
+    >
+  </footer>
 </html>
