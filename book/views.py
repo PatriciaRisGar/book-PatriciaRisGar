@@ -1,6 +1,7 @@
+from book.forms import BookForm
+from django.forms import formset_factory
 from django.urls import reverse_lazy
 from django.views import View
-from book.forms import BookForm
 from book.models import Book
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.list import ListView
@@ -62,21 +63,24 @@ class EditBook(UpdateView):
 
 class DeleteBook(DeleteView):
     model = Book
-    template_name = "book/book_check_delete.html2   "
+    template_name = "book/book_check_delete.html"
     success_url = reverse_lazy("list")
 
 
 class NewBook(View):
-    books = Book.objects.all()
+
+    def get(self,request):
+        return render(request, 'book/bookNew.html', {'form': formset_factory(BookForm,extra=2)})
 
     def post(self,request):
-        form = BookForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('add')
-        return render(request, 'book/bookNew.html', {'books': self.books,'form': form})
+        BookFormset = formset_factory(BookForm)
+        if request.method == "POST":
+            formset = BookFormset(request.POST, request.FILES)
+            if formset.is_valid():
+                pass
+        else:
+            formset = BookFormset()
+        return render(request, "manage_articles.html", {"formset": formset})
+
     
-    def get(self,request):
-        form=BookForm()
-        return render(request, 'book/bookNew.html', {'books': self.books,'form': form})
 
